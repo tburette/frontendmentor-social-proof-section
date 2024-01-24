@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+
+  <title>Frontend Mentor | Social proof section</title>
+
+  <!-- inline style for convenience. Should put in its own file -->
+  <style>
+    @font-face {
+      font-family: "League Spartan";
+      src: url("LeagueSpartan-VariableFont_wght.ttf");
+    }
+
+    :root {
+      --color-very-dark-magenta: hsl(300, 43%, 22%);
+      --color-soft-pink: hsl(333, 80%, 67%);
+      --dark-grayish-magenta: hsl(303, 10%, 53%);
+      --light-grayish-magenta: hsl(300, 24%, 96%);
+      /* color(s) not part of the style-guide: */
+      --off-white: hsl(0, 0%, 99%);
+
+      --fs-md: 15px;
+      --fs-md-lg: 16px;
+      --fs-lg: 19px;
+      --fs-xxl: 42px;
+
+      --border-radius-md: 8px;
+
+      background-color: var(--off-white);
+
+      font-size: var(--fs-md);
+      font-family: 'League Spartan';
+      font-weight: 500;
+      letter-spacing: -.5px;
+      line-height: 1.3;
+    }
+
+    * {
+      border: 0px;
+      margin: 0px;
+      min-width: 0;
+    }
+
+    main {
+      margin-block: 4em;
+      margin-inline: max(1.8em, 12vw - 2em);
+    }
+
+    main>section {
+      padding-block: 1em;
+    }
+
+    /* description section */
+    .description {
+      color: var(--dark-grayish-magenta);
+      font-weight: 500;
+      font-size: var(--fs-lg);
+      text-align: center;
+    }
+
+    h1 {
+      color: var(--color-very-dark-magenta);
+      font-size: var(--fs-xxl);
+      font-weight: bold;
+      letter-spacing: -1.5px;
+      line-height: 0.8;
+      margin-bottom: .5em;
+    }
+
+    /* ratings section */
+    .rating {
+      background-color: var(--light-grayish-magenta);
+      color: var(--color-very-dark-magenta);
+      text-align: center;
+      font-weight: bold;
+      padding-block: 1em;
+      margin-block: 1em;
+      border-radius: var(--border-radius-md);
+    }
+
+    /* Doesn't use the star image given */
+    .rating::before {
+      content: url(images/icon-star.svg) ' ' url(images/icon-star.svg) ' ' url(images/icon-star.svg) ' ' url(images/icon-star.svg) ' ' url(images/icon-star.svg) ' ';
+      font-size: 1em;
+      letter-spacing: .5em;
+    }
+
+    /* Alternative: image is a background and repeats.
+    Can't put space between stars with this approach.
+    width/height size based on the width/height of the img  */
+    /* .rating::before {
+      content: '.';
+      color: transparent;
+      display: inline-block;
+      width: calc(17px * 5);
+      height: 16px;
+      background: url('images/icon-star.svg');
+      font-size: 1em;
+    } */
+
+    .rating__text {
+      padding-top: .5em;
+      color: var(--color-very-dark-magenta);
+      font-size: var(--fs-md-lg);
+    }
+
+    /* testimony section */
+    .testimony {
+      background-color: var(--color-very-dark-magenta);
+      color: white;
+      padding: 2rem;
+      margin-block: 2rem;
+      border-radius: var(--border-radius-md);
+    }
+
+    .testimony__image {
+      border-radius: 100%;
+      width: 2.6rem;
+      margin-right: 1.5rem;
+
+      float: left;
+    }
+
+    .testimony__name {
+      font-weight: bold;
+      font-size: var(--fs-md-lg);
+    }
+
+    .testimony__verified {
+      color: var(--color-soft-pink);
+    }
+
+    .testimony__quote {
+      display: block;
+      margin-top: 1.5rem;
+      font-size: var(--fs-md-lg);
+    }
+
+    /* To stagger ratings on desktop.
+    See https://gist.github.com/tburette/0beb6df36bc6b59d168f893e8b10b14b */
+    :root {
+      --breakpoint: 800px;
+    }
+
+    @media (min-width: 800px) {
+      :root {
+        font-size: var(--fs-md-lg);
+      }
+
+      main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+
+      .description {
+        text-align: left;
+      }
+
+      h1 {
+        font-size: calc(var(--fs-xxl) * 1.1);
+      }
+
+      .ratings {
+        justify-self: end;
+      }
+
+      .rating {
+        /* width: 100%; */
+        padding: 1em;
+        margin-left: auto;
+      }
+
+      .rating__text {
+        display: inline;
+      }
+
+      .rating:nth-of-type(1) {
+        /* transform: translateX(-4em); */
+        transform: translateX(clamp(-10rem, calc((var(--breakpoint) - 100vw) / 3.5), 0px));
+      }
+
+      .rating:nth-of-type(2) {
+        /* transform: translateX(-2em); */
+        transform: translateX(clamp(-5rem, calc((var(--breakpoint) - 100vw) / 7), 0px));
+      }
+
+      .testimonies {
+        grid-column: span 2;
+        display: flex;
+        align-items: flex-start;
+        column-gap: 1rem;
+      }
+
+      .testimony {
+        margin-block: 0;
+      }
+
+      .testimony:nth-of-type(2) {
+        margin-top: 2rem;
+      }
+
+      .testimony:nth-of-type(3) {
+        margin-top: 4rem;
+      }
+    }
+
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section class="description">
+      <h1>10,000+ of our users love our products.</h1>
+      <p>
+        We only provide great products combined with excellent customer service.
+        See what our satisfied customers are saying about our services.
+      </p>
+    </section>
+
+    <section class="ratings">
+      <div class="rating">
+        <p class="rating__text">Rated 5 Stars in Reviews</p>
+      </div>
+      <div class="rating">
+        <p class="rating__text">Rated 5 Stars in Report Guru</p>
+      </div>
+      <div class="rating">
+        <p class="rating__text">Rated 5 Stars in BestTech</p>
+      </div>
+    </section>
+
+    <section class="testimonies">
+      <div class="testimony">
+        <img src="images/image-colton.jpg" class="testimony__image" alt="">
+        <div class="testimony__name">Colton Smith</div>
+        <div class="testimony__verified">Verified Buyer</div>
+        <q class="testimony__quote">
+          We needed the same printed design as the one we had ordered a week prior.
+          Not only did they find the original order, but we also received it in time.
+          Excellent!
+        </q>
+      </div>
+
+      <div class="testimony">
+        <img src="images/image-irene.jpg" class="testimony__image" alt="">
+        <div class="testimony__name">Irene Roberts</div>
+        <div class="testimony__verified">Verified Buyer</div>
+        <q class="testimony__quote">
+          Customer service is always excellent and very quick turn around. Completely
+          delighted with the simplicity of the purchase and the speed of delivery.
+        </q>
+      </div>
+
+      <div class="testimony">
+        <img src="images/image-anne.jpg" class="testimony__image" alt="">
+        <div class="testimony__name">Anne Wallace</div>
+        <div class="testimony__verified">Verified Buyer</div>
+        <q class="testimony__quote">
+          Put an order with this company and can only praise them for the very high
+          standard. Will definitely use them again and recommend them to everyone!
+        </q>
+      </div>
+
+    </section>
+  </main>
+  <footer>
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a
+        href="#">Your Name Here</a>.
+    </div>
+  </footer>
+</body>
+
+</html>
